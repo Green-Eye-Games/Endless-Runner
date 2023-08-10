@@ -33,14 +33,14 @@ public class LevelGenerator : MonoBehaviour
         {
             if (i == 0)
             {
-                GameObject.Instantiate(fenceFront, currentSpawnPosition, Quaternion.Euler(0, 0, 0));
-                currentSpawnPosition.x -= 3.75f;
+                GameObject.Instantiate(fenceFront, currentSpawnPosition, Quaternion.Euler(0, 90, 0));
+                currentSpawnPosition.z += 3.75f;
             }
 
             if (i > 0)
             {
-                GameObject.Instantiate(fenceMiddle, currentSpawnPosition, Quaternion.Euler(0, 0, 0));
-                currentSpawnPosition.x -= 3.75f;
+                GameObject.Instantiate(fenceMiddle, currentSpawnPosition, Quaternion.Euler(0, 90, 0));
+                currentSpawnPosition.z += 3.75f;
             }
         }
 
