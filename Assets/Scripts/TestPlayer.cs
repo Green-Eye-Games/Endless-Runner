@@ -3,9 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEditorInternal;
 
 public class TestPlayer : MonoBehaviour
 {
+    public enum LaneState
+    {
+        left,
+        middle,
+        right
+    }
+
+    public LaneState laneState;
+
     private GameInput _input;
 
     [SerializeField]
@@ -20,12 +30,6 @@ public class TestPlayer : MonoBehaviour
     private float _canJump = -1;
     private float _jumpRate = 2.0f;
 
-    [SerializeField]
-    Transform leftLane;
-    [SerializeField]
-    Transform middleLane;
-    [SerializeField]
-    Transform rightLane;
 
     void Start()
     {
@@ -35,41 +39,44 @@ public class TestPlayer : MonoBehaviour
         _input.Player.Move.performed += Move_performed;
         rb = GetComponent<Rigidbody>();
 
-        transform.position = middleLane.position;
+        laneState = LaneState.middle;
+        
     }
 
     private void Move_performed(InputAction.CallbackContext obj)
     { 
         if(obj.ReadValue<float>() == -1)
         {
-            if(transform.position == rightLane.position)
+            if(laneState == LaneState.right)
             {
-                transform.DOMove(middleLane.position, 1.0f);
+                laneState = LaneState.middle;
             }
-            else if (transform.position == middleLane.position)
+            else if(laneState == LaneState.middle) 
             {
-                transform.DOMove(leftLane.position, 1.0f);
+                laneState = LaneState.left;
             }
-            else if(transform.position == leftLane.position)
+            else if(laneState == LaneState.left)
             {
                 return;
             }
         }
         else if(obj.ReadValue<float>() == 1)
         {
-            if (transform.position == leftLane.position)
+            if (laneState == LaneState.left)
             {
-                transform.DOMove(middleLane.position, 1.0f);
+                laneState = LaneState.middle;
             }
-            else if (transform.position == middleLane.position)
+            else if (laneState == LaneState.middle)
             {
-                transform.DOMove(rightLane.position, 1.0f);
+                laneState = LaneState.right;
             }
-            else if (transform.position == rightLane.position)
+            else if(laneState== LaneState.right)
             {
                 return;
             }
         }
+
+
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
@@ -91,5 +98,18 @@ public class TestPlayer : MonoBehaviour
     private void Move()
     {
         transform.Translate(new Vector3(0, 0, _forwardSpeed) * Time.deltaTime);
+        switch (laneState)
+        {
+            case LaneState.left:
+                transform.position = Vector3.Lerp(transform.position, new Vector3(-4.6f, transform.position.y, transform.position.z), 0.025f);
+                break;
+            case LaneState.right:
+                transform.position = Vector3.Lerp(transform.position, new Vector3(4.6f, transform.position.y, transform.position.z), 0.025f);
+                break;
+            case LaneState.middle:
+                transform.position = Vector3.Lerp(transform.position, new Vector3(0, transform.position.y, transform.position.z), 0.025f);
+                break;
+        }
+
     }
 }
