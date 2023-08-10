@@ -16,7 +16,7 @@ public class LevelGenerator : MonoBehaviour
 
     void Start()
     {
-        currentSpawnPosition = new Vector3(0, 0, 0);
+        currentSpawnPosition = new Vector3(0, 1.65f, 0);
         GenerateLevelStart();
     }
 
