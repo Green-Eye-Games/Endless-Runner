@@ -8,11 +8,11 @@ public class CameraMove : MonoBehaviour
     float moveSpeed;
     // Update is called once per frame
 
-    private TestPlayer _player;
+    private Player _player;
 
     private void Start()
     {
-        _player = FindObjectOfType<TestPlayer>();
+        _player = FindObjectOfType<Player>();
     }
 
     void Update()

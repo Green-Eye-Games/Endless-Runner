@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEditorInternal;
 
-public class TestPlayer : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public enum LaneState
     {
@@ -17,16 +17,17 @@ public class TestPlayer : MonoBehaviour
     public LaneState laneState;
 
     private GameInput _input;
-
-    [SerializeField]
-    private float _leftRightSpeed;
     
     public float _forwardSpeed;
+
     [SerializeField]
     private float _jumpSpeed;
+    [SerializeField]
+    private float _gravity;
 
     Rigidbody rb;
-
+    Animator _anim;
+    CapsuleCollider col;
     private float _canJump = -1;
     private float _jumpRate = 2.0f;
 
@@ -38,7 +39,8 @@ public class TestPlayer : MonoBehaviour
         _input.Player.Jump.performed += Jump_performed;
         _input.Player.Move.performed += Move_performed;
         rb = GetComponent<Rigidbody>();
-
+        _anim = GetComponent<Animator>();
+        col = GetComponent<CapsuleCollider>();
         laneState = LaneState.middle;
         
     }
@@ -81,18 +83,34 @@ public class TestPlayer : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
+
         if (Time.time > _canJump)
         {
+            _anim.SetTrigger("Jump");
             _canJump = Time.time + _jumpRate;
             rb.AddForce(new Vector3(0, _jumpSpeed, 0), ForceMode.Impulse);
+
+            StartCoroutine(SizeCollider());
         }
     }
 
+    IEnumerator SizeCollider()
+    {
+        col.height = 1;
+        yield return new WaitForSeconds(0.75f);
+        col.height = 2;
+    }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        if(transform.position.y != 0.05555487f)
+        {
+            rb.velocity -= new Vector3(rb.velocity.x, _gravity, rb.velocity.z) * Time.deltaTime;
+        }
+        
+
     }
 
     private void Move()
