@@ -1,8 +1,8 @@
-using Newtonsoft.Json.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class TestPlayer : MonoBehaviour
 {
@@ -10,8 +10,8 @@ public class TestPlayer : MonoBehaviour
 
     [SerializeField]
     private float _leftRightSpeed;
-    [SerializeField]
-    private float _forwardSpeed;
+    
+    public float _forwardSpeed;
     [SerializeField]
     private float _jumpSpeed;
 
@@ -44,11 +44,11 @@ public class TestPlayer : MonoBehaviour
         {
             if(transform.position == rightLane.position)
             {
-                transform.position = middleLane.position;
+                transform.DOMove(middleLane.position, 1.0f);
             }
             else if (transform.position == middleLane.position)
             {
-                transform.position = leftLane.position;
+                transform.DOMove(leftLane.position, 1.0f);
             }
             else if(transform.position == leftLane.position)
             {
@@ -59,11 +59,11 @@ public class TestPlayer : MonoBehaviour
         {
             if (transform.position == leftLane.position)
             {
-                transform.position = middleLane.position;
+                transform.DOMove(middleLane.position, 1.0f);
             }
             else if (transform.position == middleLane.position)
             {
-                transform.position = rightLane.position;
+                transform.DOMove(rightLane.position, 1.0f);
             }
             else if (transform.position == rightLane.position)
             {
