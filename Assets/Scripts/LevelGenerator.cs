@@ -8,8 +8,11 @@ public class LevelGenerator : MonoBehaviour
     GameObject fenceFront;
     [SerializeField]
     GameObject fenceMiddle;
+    [SerializeField]
+    GameObject cubeStack;
 
     int biomeLength;
+    int j = -5;
 
     Vector3 currentSpawnPosition;
 
@@ -17,6 +20,12 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         currentSpawnPosition = new Vector3(0, 1.65f, 0);
+
+        for (int i = 0; i < 20; i++)
+        {
+            GameObject.Instantiate(cubeStack, new Vector3(1, 0, j), Quaternion.Euler(0, 0, 0));
+            j += 15;
+        }
         GenerateLevelStart();
     }
 
