@@ -5,58 +5,49 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField]
-    GameObject fenceFront;
-    [SerializeField]
-    GameObject fenceMiddle;
+    GameObject roadTile;
+    public GameObject plane;
     [SerializeField]
     GameObject cubeStack;
 
-    int biomeLength;
-    int j = -5;
-
     Vector3 currentSpawnPosition;
 
+    int planeSpawnPosition = 0;
 
     void Start()
     {
-        currentSpawnPosition = new Vector3(0, 1.65f, 0);
-
-        for (int i = 0; i < 20; i++)
-        {
-            GameObject.Instantiate(cubeStack, new Vector3(1, 0, j), Quaternion.Euler(0, 0, 0));
-            j += 15;
-        }
+        currentSpawnPosition = new Vector3(0, 0, 0);
         GenerateLevelStart();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
     }
 
     void GenerateLevelStart()
     {
-        SetBiomeLength();
-        for (int i = 0; i < biomeLength; i++)
+        for (int i = 0; i < 15; i++)
         {
-            if (i == 0)
-            {
-                GameObject.Instantiate(fenceFront, currentSpawnPosition, Quaternion.Euler(0, 90, 0));
-                currentSpawnPosition.z += 3.75f;
-            }
-
-            if (i > 0)
-            {
-                GameObject.Instantiate(fenceMiddle, currentSpawnPosition, Quaternion.Euler(0, 90, 0));
-                currentSpawnPosition.z += 3.75f;
-            }
+            GameObject.Instantiate(roadTile, currentSpawnPosition, Quaternion.Euler(0, 0, 0));
+            currentSpawnPosition.z += 9;
         }
 
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject.Instantiate(plane, new Vector3(0, 0, planeSpawnPosition), Quaternion.Euler(0, 0, 0));
+           planeSpawnPosition += 200;
+        }
     }
 
-    void SetBiomeLength()
+    public void SpwanPlane()
     {
-        biomeLength = Random.Range(3, 8);
+        Instantiate(plane, new Vector3(0, 0, planeSpawnPosition), Quaternion.Euler(0, 0, 0));
+        planeSpawnPosition += 200;
+    }
+
+    void spawnTiles()
+    {
+        GameObject.Instantiate(roadTile, currentSpawnPosition, Quaternion.Euler(0, 0, 0));
+        currentSpawnPosition.z += 9;
     }
 }
