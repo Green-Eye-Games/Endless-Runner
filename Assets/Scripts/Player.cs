@@ -119,10 +119,10 @@ public class Player : MonoBehaviour
         switch (laneState)
         {
             case LaneState.left:
-                transform.position = Vector3.Lerp(transform.position, new Vector3(-4.6f, transform.position.y, transform.position.z), 0.025f);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(-3.03f, transform.position.y, transform.position.z), 0.025f);
                 break;
             case LaneState.right:
-                transform.position = Vector3.Lerp(transform.position, new Vector3(4.6f, transform.position.y, transform.position.z), 0.025f);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(3.03f, transform.position.y, transform.position.z), 0.025f);
                 break;
             case LaneState.middle:
                 transform.position = Vector3.Lerp(transform.position, new Vector3(0, transform.position.y, transform.position.z), 0.025f);
