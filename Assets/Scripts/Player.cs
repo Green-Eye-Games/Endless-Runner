@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using DG.Tweening;
-using UnityEditorInternal;
 
 public class Player : MonoBehaviour
 {
@@ -28,8 +25,9 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     Animator _anim;
     CapsuleCollider col;
+
     private float _canJump = -1;
-    private float _jumpRate = 2.0f;
+    public float _jumpRate;
 
 
     void Start()
@@ -43,6 +41,14 @@ public class Player : MonoBehaviour
         col = GetComponent<CapsuleCollider>();
         laneState = LaneState.middle;
         
+    }
+    void Update()
+    {
+        Move();
+        if (transform.position.y != 0.05555487f)
+        {
+            rb.velocity -= new Vector3(rb.velocity.x, _gravity, rb.velocity.z) * Time.deltaTime;
+        }
     }
 
     private void Move_performed(InputAction.CallbackContext obj)
@@ -83,7 +89,8 @@ public class Player : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
-
+        //if (isGrounded && _anim.GetCurrentAnimatorStateInfo(0).IsName("RUN"))
+        //if (_anim.GetCurrentAnimatorStateInfo(0).IsName("RUN"))
         if (Time.time > _canJump)
         {
             _anim.SetTrigger("Jump");
@@ -99,18 +106,6 @@ public class Player : MonoBehaviour
         col.height = 1;
         yield return new WaitForSeconds(0.75f);
         col.height = 2;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-        if(transform.position.y != 0.05555487f)
-        {
-            rb.velocity -= new Vector3(rb.velocity.x, _gravity, rb.velocity.z) * Time.deltaTime;
-        }
-        
-
     }
 
     private void Move()
@@ -130,4 +125,12 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
 }

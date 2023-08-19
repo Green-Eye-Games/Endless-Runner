@@ -9,14 +9,17 @@ public class ObjectPooler : MonoBehaviour
     public List<GameObject> pooledTiles;
     public List<GameObject> pooledPlanes;
     public List<GameObject> pooledCones;
+    public List<GameObject> pooledHouse_5;
 
     public GameObject tiles;
     public GameObject planes;
     public GameObject cones;
+    public GameObject house_5;
 
     public int tilesToPool;
     public int planesToPool;
     public int conesToPool;
+    public int house_5ToPool;
 
     void Awake()
     {
@@ -32,6 +35,15 @@ public class ObjectPooler : MonoBehaviour
             tmpTile = Instantiate(tiles);
             tmpTile.SetActive(false);
             pooledTiles.Add(tmpTile);
+        }
+
+        pooledHouse_5 = new List<GameObject>();
+        GameObject tmpHouse_5;
+        for (int i = 0; i < house_5ToPool; i++)
+        {
+            tmpHouse_5 = Instantiate(house_5);
+            tmpHouse_5.SetActive(false);
+            pooledHouse_5.Add(tmpHouse_5);
         }
 
         pooledPlanes = new List<GameObject>();
@@ -83,6 +95,18 @@ public class ObjectPooler : MonoBehaviour
             if (!pooledCones[i].activeInHierarchy)
             {
                 return pooledCones[i];
+            }
+        }
+        return null;
+    }
+
+    public GameObject GetPooledHouse_5Object()
+    {
+        for (int i = 0; i < house_5ToPool; i++)
+        {
+            if (!pooledHouse_5[i].activeInHierarchy)
+            {
+                return pooledHouse_5[i];
             }
         }
         return null;

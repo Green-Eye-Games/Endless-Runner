@@ -13,36 +13,33 @@ public class LevelGenerator : MonoBehaviour
     GameObject trafficCone;
     [SerializeField]
     GameObject barrel;
+    [SerializeField]
+    GameObject house_5;
 
     Vector3 currentTileSpawnPosition;
     Vector3 currentPlaneSpawnPosition;
     Vector3 currentConeSpawnPosition;
+    Vector3 currentHouse_5SpawnPosition;
+    Vector3 currentHouse_5RightSpawnPosition;
 
     void Start()
     {
         currentTileSpawnPosition = new Vector3(0, 0, -9);
         currentPlaneSpawnPosition = new Vector3(0, 0, 0);
         currentConeSpawnPosition = new Vector3(0, 0.4f, 10);
+        currentHouse_5SpawnPosition = new Vector3(-12, 0, 0);
+        currentHouse_5RightSpawnPosition = new Vector3(12, 0, 0);
         GenerateLevelStart();
-    }
-
-    void Update()
-    {
     }
 
     void GenerateLevelStart()
     {
         for (int i = 0; i < 70; i++)
         {
-            //GameObject.Instantiate(roadTile, currentTileSpawnPosition, Quaternion.Euler(0, 0, 0));
-            //currentTileSpawnPosition.z += 9;
-
             GameObject roadTile = ObjectPooler.SharedInstance.GetPooledTileObject();
             if (roadTile != null)
             {
-                //bullet.transform.position = turret.transform.position;
                 roadTile.transform.position = currentTileSpawnPosition;
-                //bullet.transform.rotation = turret.transform.rotation;
                 roadTile.SetActive(true);
                 currentTileSpawnPosition.z += 9;
             }
@@ -59,7 +56,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 1; i++)
         {
             GameObject cone = ObjectPooler.SharedInstance.GetPooledConeObject();
             if (cone != null)
@@ -67,6 +64,30 @@ public class LevelGenerator : MonoBehaviour
                 cone.transform.position = currentConeSpawnPosition;
                 cone.SetActive(true);
                 currentConeSpawnPosition.z += 3;
+                Debug.Log(currentConeSpawnPosition);
+            }
+        }
+
+        for (int i = 0; i < 25; i++)
+        {
+            GameObject house_5 = ObjectPooler.SharedInstance.GetPooledHouse_5Object();
+            if (house_5 != null)
+            {
+                house_5.transform.position = currentHouse_5SpawnPosition;
+                house_5.SetActive(true);
+                currentHouse_5SpawnPosition.z += 22;
+            }
+        }
+
+        for (int i = 0; i < 25; i++)
+        {
+            GameObject house_5 = ObjectPooler.SharedInstance.GetPooledHouse_5Object();
+            if (house_5 != null)
+            {
+                house_5.transform.position = currentHouse_5RightSpawnPosition;
+                house_5.transform.eulerAngles = new Vector3(0, -90, 0); 
+                house_5.SetActive(true);
+                currentHouse_5RightSpawnPosition.z += 22;
             }
         }
     }
@@ -74,7 +95,7 @@ public class LevelGenerator : MonoBehaviour
     public void SpawnPlanes()
     {
         GameObject planeTile = ObjectPooler.SharedInstance.GetPooledPlaneObject();
-        if (roadTile != null)
+        if (planeTile != null)
         {
             planeTile.transform.position = currentPlaneSpawnPosition;
             planeTile.SetActive(true);
