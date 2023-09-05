@@ -155,15 +155,30 @@ MonoBehaviour:
   pooledTiles: []
   pooledPlanes: []
   pooledCones: []
-  pooledHouse_5: []
+  pooledStructues: []
   tiles: {fileID: 9007749737077937863, guid: 78f9008b979184c45b4ba66a02a66a75, type: 3}
   planes: {fileID: 451145960993545335, guid: f6cfca370186b2849a5684b765395a8f, type: 3}
   cones: {fileID: 2613821245456671481, guid: 0b1189229bbae504eae1be2232a31372, type: 3}
-  house_5: {fileID: 5657153004638008781, guid: bc2ef7acc0bff4d4397de939c2d1b0c1, type: 3}
+  structures:
+  - {fileID: 3115418565189912188, guid: 071bc9cd404625f4ab1f495267cc239e, type: 3}
+  - {fileID: 6020992862907265520, guid: d0aa2ed0a8c9d1641b97abc56b08b60e, type: 3}
+  - {fileID: 8397210633730543464, guid: 46e3aeac1bb7f6242af9425bbad34a01, type: 3}
+  - {fileID: 6562458022369179597, guid: 689c14e3b72bcf442a06168146790d4c, type: 3}
+  - {fileID: 5576187452118110190, guid: b7d8992258c1621429a2cbab04a0af27, type: 3}
+  - {fileID: 5534470144343750784, guid: e855e887ef9d94748a32de4b29a24666, type: 3}
+  - {fileID: 5657153004638008781, guid: bc2ef7acc0bff4d4397de939c2d1b0c1, type: 3}
+  - {fileID: 8069214776340412330, guid: 1931d8c1bfa56494f92372742fb30ddd, type: 3}
+  - {fileID: 298778109675771199, guid: 9802bedc4e5db0f48986e69cc7917885, type: 3}
+  - {fileID: 2672289240433886561, guid: 3d8de9ac3eba44345a7e142e00bc5f56, type: 3}
+  - {fileID: 6670627521768832392, guid: 6dbc823c258903e41be71127003b0af4, type: 3}
+  - {fileID: 8668950492740359791, guid: 670835b692719f84ca7cf92bc5ce1dbe, type: 3}
+  - {fileID: 7315079844948498485, guid: ea589ea54f2ea2a4d98fb2bba8642e77, type: 3}
+  - {fileID: 3876383549554202074, guid: 85f0548de9c1c35418e198a7f50cc5bf, type: 3}
+  - {fileID: 6237618847015084809, guid: 33cd7b700fd238c4c8282147279892c3, type: 3}
   tilesToPool: 75
   planesToPool: 10
   conesToPool: 25
-  house_5ToPool: 100
+  structuresToPool: 15
 --- !u!4 &132910923
 Transform:
   m_ObjectHideFlags: 0
@@ -578,6 +593,22 @@ MonoBehaviour:
   trafficCone: {fileID: 0}
   barrel: {fileID: 0}
   house_5: {fileID: 5657153004638008781, guid: bc2ef7acc0bff4d4397de939c2d1b0c1, type: 3}
+  structurePatterns:
+  - {fileID: 11400000, guid: f39a74411ac9e1243876d3315f69aa3a, type: 2}
+  - {fileID: 11400000, guid: 55204d42af0993647a8dec21ff8e87aa, type: 2}
+  - {fileID: 11400000, guid: efd97b961ebb4ba46b305a85640a0eb0, type: 2}
+  - {fileID: 11400000, guid: 99bc1354bbaa93241a25c8f5fb93945a, type: 2}
+  - {fileID: 11400000, guid: 6b8dcde54827788449a5132a56ebfff6, type: 2}
+  - {fileID: 11400000, guid: 37eb45556e6a5554180d3a2fae5f5722, type: 2}
+  - {fileID: 11400000, guid: 20aca61a19de8164b993416a082b5ddb, type: 2}
+  - {fileID: 11400000, guid: 40079e1a2a5c8d54491fcb318e435d9b, type: 2}
+  - {fileID: 11400000, guid: eb3b2cc01ff05c54daa23b62f1c1c65b, type: 2}
+  - {fileID: 11400000, guid: cc246f4199972ec4a9e6c54bee2557e9, type: 2}
+  - {fileID: 11400000, guid: 5a64f3dee8af12f4c8041db17e77efa4, type: 2}
+  - {fileID: 11400000, guid: d4130aee8f565fb4992c799e9273082f, type: 2}
+  - {fileID: 11400000, guid: 6563249ee57ae794b869a8dbb1bf5699, type: 2}
+  - {fileID: 11400000, guid: c390267647697334d86983cba32279be, type: 2}
+  - {fileID: 11400000, guid: 1e0672601b7574c4e8b822464126e16d, type: 2}
 --- !u!4 &1049597200
 Transform:
   m_ObjectHideFlags: 0

@@ -9,17 +9,20 @@ public class ObjectPooler : MonoBehaviour
     public List<GameObject> pooledTiles;
     public List<GameObject> pooledPlanes;
     public List<GameObject> pooledCones;
-    public List<GameObject> pooledHouse_5;
+    //public List<GameObject> pooledHouse_5;
+    public List<GameObject> pooledStructues;
 
     public GameObject tiles;
     public GameObject planes;
     public GameObject cones;
-    public GameObject house_5;
+    //public GameObject house_5;
+    public GameObject[] structures;
 
     public int tilesToPool;
     public int planesToPool;
     public int conesToPool;
-    public int house_5ToPool;
+    //public int house_5ToPool;
+    public int structuresToPool;
 
     void Awake()
     {
@@ -37,14 +40,14 @@ public class ObjectPooler : MonoBehaviour
             pooledTiles.Add(tmpTile);
         }
 
-        pooledHouse_5 = new List<GameObject>();
-        GameObject tmpHouse_5;
-        for (int i = 0; i < house_5ToPool; i++)
-        {
-            tmpHouse_5 = Instantiate(house_5);
-            tmpHouse_5.SetActive(false);
-            pooledHouse_5.Add(tmpHouse_5);
-        }
+        //pooledHouse_5 = new List<GameObject>();
+        //GameObject tmpHouse_5;
+        //for (int i = 0; i < house_5ToPool; i++)
+        //{
+        //    tmpHouse_5 = Instantiate(house_5);
+        //    tmpHouse_5.SetActive(false);
+        //    pooledHouse_5.Add(tmpHouse_5);
+        //}
 
         pooledPlanes = new List<GameObject>();
         GameObject tmpPlane;
@@ -62,6 +65,18 @@ public class ObjectPooler : MonoBehaviour
             tmpcone = Instantiate(cones);
             tmpcone.SetActive(false);
             pooledCones.Add(tmpcone);
+        }
+
+        pooledStructues = new List<GameObject>();
+        GameObject tmpStructures;
+        for (int i = 0; i < structures.Length; i++)
+        {
+            for (int j = 0; j < structuresToPool; j++)
+            {
+                tmpStructures = Instantiate(structures[i]);
+                tmpStructures.SetActive(false);
+                pooledStructues.Add(tmpStructures);
+            }
         }
     }
     public GameObject GetPooledTileObject()
@@ -100,13 +115,40 @@ public class ObjectPooler : MonoBehaviour
         return null;
     }
 
-    public GameObject GetPooledHouse_5Object()
+    //public GameObject GetPooledHouse_5Object()
+    //{
+    //    for (int i = 0; i < house_5ToPool; i++)
+    //    {
+    //        if (!pooledHouse_5[i].activeInHierarchy)
+    //        {
+    //            return pooledHouse_5[i];
+    //        }
+    //    }
+    //    return null;
+    //}
+
+    //public GameObject GetPooledStructureObject()
+    //{
+    //    for (int i = 0; i < (structuresToPool * structures.Length); i++)
+    //    {
+    //        int rndNum = Random.Range(0, (structuresToPool * structures.Length) - 1);
+    //        if (!pooledStructues[rndNum].activeInHierarchy)
+    //        {
+    //            return pooledStructues[rndNum];
+    //        }
+    //    }
+    //    return null;
+    //}
+
+    public GameObject GetPooledStructureObject(out int rndNum)
     {
-        for (int i = 0; i < house_5ToPool; i++)
+        rndNum = -1;
+        for (int i = 0; i < (structuresToPool * structures.Length); i++)
         {
-            if (!pooledHouse_5[i].activeInHierarchy)
+            rndNum = Random.Range(0, (structuresToPool * structures.Length) - 1);
+            if (!pooledStructues[rndNum].activeInHierarchy)
             {
-                return pooledHouse_5[i];
+                return pooledStructues[rndNum];
             }
         }
         return null;
