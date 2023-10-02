@@ -589,10 +589,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadTile: {fileID: 9007749737077937863, guid: 78f9008b979184c45b4ba66a02a66a75, type: 3}
   plane: {fileID: 451145960993545335, guid: f6cfca370186b2849a5684b765395a8f, type: 3}
-  trashcan: {fileID: 0}
-  trafficCone: {fileID: 0}
-  barrel: {fileID: 0}
-  house_5: {fileID: 5657153004638008781, guid: bc2ef7acc0bff4d4397de939c2d1b0c1, type: 3}
+  obstaclePrefabs:
+  - {fileID: 2613821245456671481, guid: 0b1189229bbae504eae1be2232a31372, type: 3}
+  - {fileID: 9015761052944814332, guid: 728c27807a2874b4ca3ace21846c2706, type: 3}
+  collectiblePrefab: {fileID: 1409363913295329413, guid: 3c1e9762c9cd72144a6c84bb36fe1559, type: 3}
   structurePatterns:
   - {fileID: 11400000, guid: f39a74411ac9e1243876d3315f69aa3a, type: 2}
   - {fileID: 11400000, guid: 55204d42af0993647a8dec21ff8e87aa, type: 2}
@@ -609,6 +609,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6563249ee57ae794b869a8dbb1bf5699, type: 2}
   - {fileID: 11400000, guid: c390267647697334d86983cba32279be, type: 2}
   - {fileID: 11400000, guid: 1e0672601b7574c4e8b822464126e16d, type: 2}
+  player: {fileID: 1979985193}
 --- !u!4 &1049597200
 Transform:
   m_ObjectHideFlags: 0
@@ -617,7 +618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049597198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.911882, y: -1.7904658, z: -4.221138}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -742,3 +743,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 490b35fbe651ac04cad1f0403af62de2, type: 3}
+--- !u!114 &1979985193 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 145048031, guid: 490b35fbe651ac04cad1f0403af62de2, type: 3}
+  m_PrefabInstance: {fileID: 1413062679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ab7bfbf71ca014380907cb8c3e730a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

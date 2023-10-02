@@ -7,36 +7,49 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     GameObject roadTile;
     public GameObject plane;
-    [SerializeField]
-    GameObject trashcan;
-    [SerializeField]
-    GameObject trafficCone;
-    [SerializeField]
-    GameObject barrel;
-    [SerializeField]
-    GameObject house_5;
+    public GameObject[] obstaclePrefabs;
+    public GameObject collectiblePrefab;
 
     public StructurePattern[] structurePatterns;
 
     Vector3 currentTileSpawnPosition;
     Vector3 currentPlaneSpawnPosition;
     Vector3 currentConeSpawnPosition;
-    Vector3 currentHouse_5SpawnPosition;
-    Vector3 currentHouse_5RightSpawnPosition;
 
     int structureIndex;
 
     float currentStructureRightSpawnPosition = 0;
     float currentStructureLeftSpawnPosition = 0;
+    float groupDistance = 50f;
+    float lastGroupPosition;
+
+    public Player player;
+
+    enum Lanestate
+    {
+        left,
+        middle,
+        right
+    }
+
+    Lanestate lanestate;
 
     void Start()
     {
         currentTileSpawnPosition = new Vector3(0, 0, -9);
         currentPlaneSpawnPosition = new Vector3(0, 0, 0);
         currentConeSpawnPosition = new Vector3(0, 0.4f, 10);
-        currentHouse_5SpawnPosition = new Vector3(-12, 0, 0);
-        currentHouse_5RightSpawnPosition = new Vector3(12, 0, 0);
+        lastGroupPosition = 0f;
         GenerateLevelStart();
+        SpawnObstacleGroup();
+    }
+
+    void Update()
+    {
+        if (player.transform.position.z >= lastGroupPosition + groupDistance)
+        {
+            SpawnObstacleGroup();
+        }
     }
 
     void GenerateLevelStart()
@@ -63,17 +76,17 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 1; i++)
-        {
-            GameObject cone = ObjectPooler.SharedInstance.GetPooledConeObject();
-            if (cone != null)
-            {
-                cone.transform.position = currentConeSpawnPosition;
-                cone.SetActive(true);
-                currentConeSpawnPosition.z += 3;
-                Debug.Log(currentConeSpawnPosition);
-            }
-        }
+        //for (int i = 0; i < 25; i++)
+        //{
+        //    GameObject cone = ObjectPooler.SharedInstance.GetPooledConeObject();
+        //    if (cone != null)
+        //    {
+        //        cone.transform.position = currentConeSpawnPosition;
+        //        cone.SetActive(true);
+        //        currentConeSpawnPosition.z += 3;
+        //        Debug.Log(currentConeSpawnPosition);
+        //    }
+        //}
 
         for (int i = 0; i < 25; i++)
         {
@@ -421,5 +434,32 @@ public class LevelGenerator : MonoBehaviour
                 currentStructureLeftSpawnPosition += structureOffset.y;
             }
         }
+    }
+
+    private void SpawnObstacleGroup()
+    {
+        int collectiblesPerGroup = Random.Range(200, 200); 
+
+        //for (int i = 0; i < obstaclesPerGroup; i++)
+        //{
+        //    // Spawn obstacles
+        //    Vector3 obstacleSpawnPosition = new Vector3(lastGroupPosition + i * 2f, 0f, 0f);
+        //    Quaternion obstacleSpawnRotation = Quaternion.identity;
+        //    GameObject obstacle = Instantiate(obstaclePrefab, obstacleSpawnPosition, obstacleSpawnRotation);
+
+        //    // Set any additional properties or behaviors for the obstacle
+
+        //    // Set the obstacle as a child of the spawner for organization
+        //    obstacle.transform.parent = transform;
+        //}
+
+        for (int i = 0; i < collectiblesPerGroup; i++)
+        {
+
+            Vector3 collectibleSpawnPosition = new Vector3(0, 1.5f, lastGroupPosition + i * 2f);
+            Instantiate(collectiblePrefab, collectibleSpawnPosition, Quaternion.identity);
+        }
+
+        lastGroupPosition += groupDistance;
     }
 }
